@@ -3,6 +3,7 @@ pub mod day_two;
 
 use std::{fs::File, path::Path};
 use std::io::Read;
+use std::collections::HashMap;
 
 pub struct Config<'a> {
     day: i32,
@@ -31,6 +32,62 @@ pub fn get_file_content(path: &Path) -> String {
         }
     };
 
+}
+
+pub fn check_replace(s: &mut String, map: &HashMap<&str, char>) -> () {
+    let mut buffer = String::new();
+    for c in s.clone().chars().into_iter() {
+        buffer.push(c);
+        if buffer.len() > 3 {
+            for value in map.clone() {
+                let (key, num) = value;
+                if buffer.contains(key) {
+                    *s = s.replace(key, &num.to_string());
+                    buffer.clear();
+                    break;
+                };
+            }
+        }
+    }
+}
+
+pub fn check_replace_rev(s: &mut String, map: &HashMap<&str, char>) -> () {
+    let mut buffer = String::new();
+    for c in s.clone().chars().into_iter().rev() {
+        buffer.push(c);
+        if buffer.len() > 3 {
+            for value in map.clone() {
+                let (key, num) = value;
+                if buffer.contains(key) {
+                    *s = s.replace(key, &num.to_string());
+                    buffer.clear();
+                    break;
+                };
+            }
+        }
+    }
+}
+
+pub fn convert_number_strings(s: &mut String) -> () {
+    let map = HashMap::from([
+                            ("one", '1'),
+                            ("two", '2'),
+                            ("three", '3'),
+                            ("four", '4'),
+                            ("five", '5'),
+                            ("six", '6'),
+                            ("seven", '7'),
+                            ("eight", '8'),
+                            ("nine", '9'),
+    ]);
+    let str_vec = s.split("\n").collect::<Vec<&str>>();
+    let replaced_str_vec = str_vec.into_iter().map(|x|{
+        let mut x_string = x.to_string();
+        check_replace(&mut x_string, &map);
+        check_replace_rev(&mut x_string, &map);
+        x_string
+    }).collect::<Vec<String>>();
+    *s = replaced_str_vec.join("\n");
 }
 
 pub fn get_numbers(s: &String) -> Vec<String> {
@@ -100,5 +157,13 @@ mod tests{
         let numbers = get_numbers(&contents);
         let result = add_string_numbers(&numbers);
         assert_eq!(result, 142);
+    }
+
+    #[test]
+    fn number_convertion(){
+        let path = Path::new("./data/day1_example2.txt");
+        let mut result = get_file_content(&path);
+        convert_number_strings(&mut result);
+        assert_eq!(String::from("219\n8wo3\nabc123xyz\nx2ne34\n49872\nz1ight234\n7pqrst6teen\n"), result);
     }
 }
