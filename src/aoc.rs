@@ -43,9 +43,7 @@ pub fn check_replace(s: &mut String, map: &HashMap<&str, char>) -> () {
             for value in map.clone() {
                 let (key, num) = value;
                 if buffer.contains(key) {
-                    // println!("forward: \nbuffer {} \nstring {}", buffer, s);
                     *s = s.replacen(key, &num.to_string(), 1);
-                    // println!("string after {}\n", s);
                     buffer.clear();
                     done_flag = true;
                     break;
@@ -58,14 +56,11 @@ pub fn check_replace(s: &mut String, map: &HashMap<&str, char>) -> () {
     done_flag = false;
     for c in s.clone().chars().into_iter().rev() {
         if done_flag {break;};
-        // println!("buffer inside reverse: {}", buffer);
         if buffer.len() > 3 {
             for value in map.clone() {
                 let (key, num) = value;
                 if buffer.contains(key) {
-                    // println!("backward: \nbuffer {} \nstring {}", buffer, s);
                     *s = s.replacen(key, &num.to_string(), 1);
-                    // println!("string after {}\n", s);
                     buffer.clear();
                     done_flag = true;
                     break;
@@ -95,13 +90,6 @@ pub fn convert_number_strings(s: &mut String) -> () {
         check_replace(&mut x_string, &map);
         x_string
     }).collect::<Vec<String>>();
-    // let mut replaced_str_vec = Vec::new();
-    // for value in str_vec.into_iter() {
-    //     let mut x_string = value.to_string();
-    //     check_replace(&mut x_string, &map);
-    //     check_replace_rev(&mut x_string, &map);
-    //     replaced_str_vec.push(x_string);
-    // }
     *s = replaced_str_vec.join("\n");
 }
 
@@ -136,15 +124,9 @@ pub fn add_string_numbers(s: &Vec<String>) -> usize {
 }
 
 pub fn run(instructions: Config){
-    if instructions.day == 1 {
-        if instructions.problem == 1 {
-            crate::aoc::day_one::first_problem(instructions.path);
-        } else if instructions.problem == 2 {
-            crate::aoc::day_one::second_problem(instructions.path);
-        } else {
-            println!("Either this problem wasn't completed or doesn't exist sorry");
-        }
-    } else {
-        println!("Either this day wasn't completed or doesn't exist sorry");
+    match instructions {
+        Config {day: 1, problem: 1, ..} => crate::aoc::day_one::first_problem(instructions.path),
+        Config {day: 1, problem: 2, ..} => crate::aoc::day_one::second_problem(instructions.path),
+        _ => println!("Either this day wasn't completed, or doesn't exist sorry"),
     }
 }
