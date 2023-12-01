@@ -1,5 +1,24 @@
+pub mod day_one;
+pub mod day_two;
+
 use std::{fs::File, path::Path};
 use std::io::Read;
+
+pub struct Config<'a> {
+    day: i32,
+    problem: i32,
+    path: &'a Path,
+}
+
+impl<'a> Config<'a>{
+    pub fn new(day: i32, problem: i32, path: &String) -> Config{
+        Config {
+            day,
+            problem,
+            path: Path::new(path),
+        }
+    }
+}
 
 pub fn get_file_content(path: &Path) -> String {
     let mut file = File::open(path).expect("The file could not be opened");
@@ -44,9 +63,19 @@ pub fn add_string_numbers(s: &Vec<String>) -> usize {
     return sum_values;
 }
 
+pub fn run(instructions: Config){
+    if instructions.day == 1 {
+        if instructions.problem == 1 {
+            crate::aoc::day_one::first_problem(instructions.path);
+        }
+    } else {
+        println!("Either this day wasn't completed or doesn't exist sorry");
+    }
+}
+
 #[cfg(test)]
 mod tests{
-    use crate::*;
+    use crate::aoc::*;
 
     #[test]
     fn file_read(){
