@@ -127,6 +127,8 @@ pub fn run(instructions: Config){
     match instructions {
         Config {day: 1, problem: 1, ..} => crate::aoc::day_one::first_problem(instructions.path),
         Config {day: 1, problem: 2, ..} => crate::aoc::day_one::second_problem(instructions.path),
+        Config {day: 2, problem: 1, ..} => crate::aoc::day_two::first_problem(instructions.path),
+        Config {day: 2, problem: 2, ..} => crate::aoc::day_two::second_problem(instructions.path),
         _ => println!("Either this day wasn't completed, or doesn't exist sorry"),
     }
 }
