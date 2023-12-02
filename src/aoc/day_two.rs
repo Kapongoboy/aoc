@@ -47,11 +47,9 @@ pub fn second_problem(path: &Path) {
     let contents = get_file_content(&path);
     println!("contents: \n{}", contents);
     let lines: Vec<&str> = contents.split("\n").collect();
-    let mut validity: Vec<bool> = Vec::new();
     let mut sum: u32 = 0;
     for line in lines.into_iter() {
         let mut m: HashMap<char, u32 >= HashMap::from([('e', 0), ('d', 0), ('n', 0)]);
-        validity.push(true);
         if line.is_empty() {continue;};
         let no_white = line.replace(" ", "");
         let g_split = no_white.split(':').collect::<Vec<&str>>();
