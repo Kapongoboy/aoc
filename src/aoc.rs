@@ -1,5 +1,6 @@
 pub mod day_one;
 pub mod day_two;
+pub mod day_three;
 
 use std::{fs::File, path::Path};
 use std::io::Read;
@@ -129,6 +130,8 @@ pub fn run(instructions: Config){
         Config {day: 1, problem: 2, ..} => crate::aoc::day_one::second_problem(instructions.path),
         Config {day: 2, problem: 1, ..} => crate::aoc::day_two::first_problem(instructions.path),
         Config {day: 2, problem: 2, ..} => crate::aoc::day_two::second_problem(instructions.path),
+        Config {day: 3, problem: 1, ..} => crate::aoc::day_three::first_problem(instructions.path),
+        Config {day: 3, problem: 2, ..} => crate::aoc::day_three::second_problem(instructions.path),
         _ => println!("Either this day wasn't completed, or doesn't exist sorry"),
     }
 }
