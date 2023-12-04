@@ -85,6 +85,6 @@ def problem_two(path: pathlib.Path):
 
 if __name__ == "__main__":
     path_str = sys.argv[1]
-    # problem_one(pathlib.Path(path_str))
+    problem_one(pathlib.Path(path_str))
     problem_two(pathlib.Path(path_str))
 
