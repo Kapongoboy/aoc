@@ -1,2 +1,2 @@
-# AOC 2023
+# AOC
 It's that time of the year again, The elves need our help. Let's try to not let them down.
