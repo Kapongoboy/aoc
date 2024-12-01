@@ -1,1 +1,4 @@
-/target
+**/target/
+**/zig-out/
+**/data/
+**/.zig-cache/
