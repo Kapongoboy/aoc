@@ -51,6 +51,6 @@ test "part one with data" {
     var arena = std.heap.ArenaAllocator.init(ttg.allocator);
     defer arena.deinit();
 
-    const data = try com.read_file("data/day_one_part_one.txt", arena.allocator());
+    const data = try com.read_file("data/day_one.txt", arena.allocator());
     try ttg.expectEqual(2769675, try part_one(data, arena.allocator()));
 }
